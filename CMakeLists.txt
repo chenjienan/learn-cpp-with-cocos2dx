@@ -56,12 +56,14 @@ endif()
 
 # add cross-platforms source files and header files 
 list(APPEND GAME_SOURCE
-     Classes/AppDelegate.cpp
-     Classes/WelcomeScene.cpp
-     )
+        Classes/AppDelegate.cpp
+        Classes/WelcomeScene.cpp
+        Classes/MenuScene.cpp)
 list(APPEND GAME_HEADER
-     Classes/AppDelegate.h
-     Classes/WelcomeScene.h)
+        Classes/Defines.h
+        Classes/AppDelegate.h
+        Classes/WelcomeScene.h
+        Classes/MenuScene.h)
 
 if(ANDROID)
     # change APP_NAME to the share library name for Android, it's value depend on AndroidManifest.xml

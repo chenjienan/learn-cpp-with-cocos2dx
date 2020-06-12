@@ -3,6 +3,7 @@
 //
 
 #include "WelcomeScene.h"
+#include "MenuScene.h"
 
 USING_NS_CC;
 
@@ -24,7 +25,6 @@ Scene* WelcomeScene::createScene()
 // on "init" you need to initialize your instance
 bool WelcomeScene::init()
 {
-    //////////////////////////////
     // 1. super init first
     if (!Layer::init())
     {
@@ -43,5 +43,18 @@ bool WelcomeScene::init()
     // add the sprite as a child to this layer
     this->addChild(sprite, 0);
 
+    //跳转到菜单页面
+    this->runAction(Sequence::create(
+            DelayTime::create(1.0f),
+            CallFunc::create(CC_CALLBACK_0(WelcomeScene::replace2MenuScene, this)),
+            NULL));
+
     return true;
+}
+
+void WelcomeScene::replace2MenuScene(){
+    auto scene = MenuScene::createScene();
+    Director::getInstance()->replaceScene(scene);
+//    auto trans =TransitionCrossFade::create(1.5f, scene);
+//    Director::getInstance()->replaceScene(trans);
 }

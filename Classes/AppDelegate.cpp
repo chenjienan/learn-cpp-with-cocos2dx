@@ -92,12 +92,10 @@ bool AppDelegate::applicationDidFinishLaunching() {
     register_all_packages();
 
     // create a scene. it's an autorelease object
-//    auto scene = WelcomeScene::createScene();
-    auto scene = MenuScene::createScene();
+    auto welcomeScene = WelcomeScene::createScene();
 
     // run
-    director->runWithScene(scene);
-
+    director->runWithScene(welcomeScene);
     return true;
 }
 

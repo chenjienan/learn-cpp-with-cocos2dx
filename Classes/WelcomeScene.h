@@ -16,5 +16,9 @@ public:
     void menuCloseCallback(cocos2d::Ref* pSender);
 
     // implement the "static create()" method manually
+    //实现静态创建方法
     CREATE_FUNC(WelcomeScene);
+
+    //跳转到菜单界面
+    void replace2MenuScene();
 };

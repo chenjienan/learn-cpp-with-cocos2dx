@@ -50,19 +50,20 @@ bool MenuScene::init()
     title->setScale(WINSIZE.width*0.8f/spx,WINSIZE.width*0.8f/spx);
     this->addChild(title);
 
-//    //关卡数字
-//    auto levelTTF = Label::createWithTTF("","fonts/I-PenCrane-B-2.ttf", 30);
+    //关卡数字
+    auto levelTTF = Label::createWithTTF("","fonts/I-PenCrane-B-2.ttf", 30);
 //    levelTTF->setString(StringUtils::format("第 %d 關",GlobalManager::getInstance()->currentLevel));
-//    levelTTF->setColor(Color3B(142.0f/255.0f,72.0f/255.0f,12.0f/255.0f));
-//    levelTTF->setPosition(Vec2(WINSIZE.width/2,WINSIZE.height-200));
-//    this->addChild(levelTTF);
+    levelTTF->setString(StringUtils::format("第 1 關"));
+    levelTTF->setColor(Color3B(142.0f/255.0f,72.0f/255.0f,12.0f/255.0f));
+    levelTTF->setPosition(Vec2(WINSIZE.width/2,WINSIZE.height-200));
+    this->addChild(levelTTF);
 
     //按钮
     auto startBtn = MenuItemImage::create("menu/start.png", "menu/start.png");
     startBtn->initWithCallback(CC_CALLBACK_1(MenuScene::onStartBtnPressed, this));
     startBtn->setPosition(WINSIZE.width/2, WINSIZE.height-300);
 
-    auto menu = Menu::create(startBtn,NULL);
+    auto menu = Menu::create(startBtn,NULL);    // 注意最后一定要加个空项，告诉他没了可以开始创建了。
     menu->setPosition(Point::ZERO);
     this->addChild(menu);
 
@@ -76,12 +77,21 @@ bool MenuScene::init()
     return true;
 }
 
+int add(int a, int b) {
+    return a + b;
+}
+
 //开始游戏
 void MenuScene::onStartBtnPressed(Ref* pSender) {
     //需要跳转到游戏界面
+    CCLOG("Start Game");
+    auto f1 = std::bind(add, std::placeholders::_1, std::placeholders::_2);
+    auto result = f1(4, 5);
+    CCLOG("%d", result);
 }
 
 //选择关卡
 void MenuScene::onSelectBtnPressed(Ref* pSender) {
     //需要跳转到选择关卡界面
+    CCLOG("Select Level");
 }

@@ -21,4 +21,7 @@ public:
 
     //跳转到菜单界面
     void replace2MenuScene();
+
+    //初始化第一次登录数据
+    void initFirstLoginData();
 };

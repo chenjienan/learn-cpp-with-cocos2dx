@@ -2,19 +2,18 @@
 // Created by Terence Machine on 2020/6/4.
 //
 
-#ifndef PROJ_ANDROID_GAMEDATAMANAGER_H
-#define PROJ_ANDROID_GAMEDATAMANAGER_H
-
+#pragma once
 #include "cocos2d.h"
-
+#include "CSVParser.h"
 
 USING_NS_CC;
+using namespace CSVParser;
 
 class GameDataManager {
 
 public:
     static GameDataManager* getInstance();
-    static GameDataManager* singleInstance();
+    static GameDataManager* singleInstance;
 
     GameDataManager();
     ~GameDataManager();
@@ -26,7 +25,7 @@ public:
     int getObsBallNum(int level);
     int getUserBallNum(int level);
     int getRotateSpeed(int level);
-    int getTurnDir(int level);
+    int getRotateDir(int level);
     int getStartAngle(int level);
     int getEndAngle(int level);
     bool getIsFirstInit();
@@ -42,7 +41,7 @@ public:
     //旋转的速度
     int rotateSpeed;
     //旋转的方向
-    int turnDir;
+    int rotateDir;
     //总行数
     int totalRow;
     //遮罩圆开始角度
@@ -50,7 +49,5 @@ public:
     //遮罩圆开始角度
     int endAngle;
 private:
-//    Csv csv;
+    Csv csv;
 };
-
-#endif //PROJ_ANDROID_GAMEDATAMANAGER_H

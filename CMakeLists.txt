@@ -60,7 +60,6 @@ list(APPEND GAME_SOURCE
         Classes/WelcomeScene.cpp
         Classes/MenuScene.cpp
         Classes/CSVParser.cpp
-        Classes/UserDataManager.cpp
         Classes/GameDataManager.cpp)
 list(APPEND GAME_HEADER
         Classes/Defines.h
@@ -68,7 +67,6 @@ list(APPEND GAME_HEADER
         Classes/WelcomeScene.h
         Classes/MenuScene.h
         Classes/CSVParser.h
-        Classes/UserDataManager.h
         Classes/GameDataManager.h)
 
 if(ANDROID)

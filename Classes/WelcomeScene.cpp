@@ -4,6 +4,7 @@
 
 #include "WelcomeScene.h"
 #include "MenuScene.h"
+#include "GameDataManager.h"
 
 USING_NS_CC;
 
@@ -43,6 +44,9 @@ bool WelcomeScene::init()
     // add the sprite as a child to this layer
     this->addChild(sprite, 0);
 
+    //初始化
+    initFirstLoginData();
+
     //跳转到菜单页面
     this->runAction(Sequence::create(
             DelayTime::create(1.0f),
@@ -57,4 +61,15 @@ void WelcomeScene::replace2MenuScene(){
     Director::getInstance()->replaceScene(scene);
 //    auto trans =TransitionCrossFade::create(1.5f, scene);
 //    Director::getInstance()->replaceScene(trans);
+}
+
+void WelcomeScene::initFirstLoginData() {
+    if (!GameDataManager::getInstance()->getIsFirstInit()) {
+        GameDataManager::getInstance()->setIsFirstInit(true);
+        GameDataManager::getInstance()->setCurrentMaxLevel(1);
+    }
+
+    //获得最大关卡数据
+    auto maxLevel = GameDataManager::getInstance()->getCurrentMaxLevel();
+    GameDataManager::getInstance()->loadGameData(maxLevel);
 }

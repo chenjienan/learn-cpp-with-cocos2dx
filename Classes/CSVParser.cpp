@@ -72,16 +72,13 @@ namespace CSVParser {
                 case NewFieldStart: {   // 新字段开始
                     if (ch == '"') {
                         State = QuotesField;
-                    }
-                    else if (ch == ',') {
+                    } else if (ch == ',') {
                         Fields.push_back("");
                         State = FieldSeparator;
-                    }
-                    else if (ch == '\r' || ch == '\n') {
+                    } else if (ch == '\r' || ch == '\n') {
                         m_strErrorInfo = "语法错误：有空行";
                         State = Error;
-                    }
-                    else {
+                    } else {
                         strField.push_back(ch);
                         State = NonQuotesField;
                     }
@@ -93,12 +90,13 @@ namespace CSVParser {
                         Fields.push_back(strField);
                         strField.clear();
                         State = FieldSeparator;
-                    }
-                    else if (ch == '\r') {
+                    } else if (ch == '\n') {
                         Fields.push_back(strField);
-                        State = RowSeparator;
-                    }
-                    else {
+                        m_content.push_back(Fields);
+                        Fields=Row();
+                        strField.clear();
+                        State = NewFieldStart;
+                    } else {
                         strField.push_back(ch);
                     }
                     break;
@@ -107,8 +105,7 @@ namespace CSVParser {
                 case QuotesField: { // 引号字段
                     if (ch == '"') {
                         State = QuoteInQuotesField;
-                    }
-                    else {
+                    } else {
                         strField.push_back(ch);
                     }
                     break;
@@ -117,16 +114,16 @@ namespace CSVParser {
                 case FieldSeparator: { // 字段分隔
                     if (ch == ',') {
                         Fields.push_back("");
-                    }
-                    else if (ch == '"') {
+                    } else if (ch == '"') {
                         strField.clear();
                         State = QuotesField;
-                    }
-                    else if (ch == '\r') {
+                    } else if (ch == '\n') {
                         Fields.push_back("");
-                        State = RowSeparator;
-                    }
-                    else {
+                        m_content.push_back(Fields);
+                        Fields = Row();
+                        strField.clear();
+                        State = NewFieldStart;
+                    } else {
                         strField.push_back(ch);
                         State = NonQuotesField;
                     }
@@ -134,23 +131,17 @@ namespace CSVParser {
                 }
 
                 case QuoteInQuotesField: { // 引号字段中的引号
-                    if (ch == ',') {
-                        // 引号字段闭合
+                    if (ch == ',') { // 引号字段闭合
                         Fields.push_back(strField);
                         strField.clear();
                         State = FieldSeparator;
-                    }
-                    else if (ch == '\r') {
-                        // 引号字段闭合
+                    } else if (ch == '\r') { // 引号字段闭合
                         Fields.push_back(strField);
                         State = RowSeparator;
-                    }
-                    else if (ch == '"') {
-                        // 转义
+                    } else if (ch == '"') { // 转义
                         strField.push_back(ch);
                         State = QuotesField;
-                    }
-                    else {
+                    } else {
                         m_strErrorInfo = "语法错误： 转义字符 \" 不能完成转义 或 引号字段结尾引号没有紧贴字段分隔符";
                         State = Error;
                     }
@@ -160,11 +151,10 @@ namespace CSVParser {
                 case RowSeparator: { // 行分隔符字符1，回车
                     if (ch == '\n') {
                         m_content.push_back(Fields);
-                        Fields = Row(); // Fields.clear();
+                        Fields = Row();
                         strField.clear();
                         State = NewFieldStart;
-                    }
-                    else {
+                    } else {
                         m_strErrorInfo = "语法错误： 行分隔用了回车 \\r。但未使用回车换行 \\r\\n ";
                         State = Error;
                     }
@@ -180,11 +170,9 @@ namespace CSVParser {
                 }
             }
         }
-        // end for
 
         switch (State) {
-            case NewFieldStart: {
-                // Excel导出的CSV每行都以/r/n结尾。包括最后一行
+            case NewFieldStart: { // Excel导出的CSV每行都以/r/n结尾。包括最后一行
                 break;
             }
 
@@ -233,6 +221,4 @@ namespace CSVParser {
         }
         throw "cannot return this row (doesn't exist)";
     }
-
-
 }

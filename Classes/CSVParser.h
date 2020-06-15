@@ -67,6 +67,18 @@ namespace CSVParser {
         vector<string> m_header;
         string m_strErrorInfo;
 
+        void setHeader();
+        void Load(const string& filename, string& Data);
+
+    public:
+        Csv(const string& filename);
+
+        ~Csv() {}
+
+        void Parse(const string& filename);
+
+        Row& operator[](unsigned int key);
+
         vector<string> getHeader() const {
             return m_header;
         }
@@ -82,17 +94,5 @@ namespace CSVParser {
         unsigned int getColumnCount() const {
             return m_header.size();
         }
-
-        void setHeader();
-
-        void Load(const string& filename, string& Data);
-
-        void Parse(const string& filename);
-
-        Row& operator[](unsigned int key);
-
-    public:
-        Csv(const string& filename);
-        ~Csv() {}
     };
 }

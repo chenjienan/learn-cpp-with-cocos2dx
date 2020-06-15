@@ -77,17 +77,10 @@ bool MenuScene::init()
     return true;
 }
 
-int add(int a, int b) {
-    return a + b;
-}
-
 //开始游戏
 void MenuScene::onStartBtnPressed(Ref* pSender) {
     //需要跳转到游戏界面
     CCLOG("Start Game");
-    auto f1 = std::bind(add, std::placeholders::_1, std::placeholders::_2);
-    auto result = f1(4, 5);
-    CCLOG("%d", result);
 }
 
 //选择关卡

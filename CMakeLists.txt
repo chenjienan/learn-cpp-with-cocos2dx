@@ -60,14 +60,20 @@ list(APPEND GAME_SOURCE
         Classes/WelcomeScene.cpp
         Classes/MenuScene.cpp
         Classes/CSVParser.cpp
-        Classes/GameDataManager.cpp)
+        Classes/GameDataManager.cpp
+        Classes/Ball.cpp
+        Classes/GameScene.cpp
+        Classes/GlobalManager.cpp)
 list(APPEND GAME_HEADER
         Classes/Defines.h
         Classes/AppDelegate.h
         Classes/WelcomeScene.h
         Classes/MenuScene.h
         Classes/CSVParser.h
-        Classes/GameDataManager.h)
+        Classes/GameDataManager.h
+        Classes/Ball.h
+        Classes/GameScene.h
+        Classes/GlobalManager.h)
 
 if(ANDROID)
     # change APP_NAME to the share library name for Android, it's value depend on AndroidManifest.xml

@@ -58,9 +58,9 @@ bool WelcomeScene::init()
 
 void WelcomeScene::replace2MenuScene(){
     auto scene = MenuScene::createScene();
-    Director::getInstance()->replaceScene(scene);
-//    auto trans =TransitionCrossFade::create(1.5f, scene);
-//    Director::getInstance()->replaceScene(trans);
+//    Director::getInstance()->replaceScene(scene);
+    auto trans =TransitionCrossFade::create(1.5f, scene);
+    Director::getInstance()->replaceScene(trans);
 }
 
 void WelcomeScene::initFirstLoginData() {
